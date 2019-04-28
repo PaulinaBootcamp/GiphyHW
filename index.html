@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Stop: It's Giphy time</title>
+
+    <!-- Bootstrap File -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="arrayDisplayButtons"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="gifResult">
+
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+
+                    <form id="userForm">
+                        <label for="user-input">Enter new Gif category below:</label>
+                        <input type="text" id="user-input"><br>
+
+                        <!-- Button triggers new movie to be added -->
+                        <input id="add-selection" type="submit" value="Add new button to selection">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var searchWords = ["snow", "summer", "cold", "winter", "blizzard", "sprin", "thunderstorm", "autumn", "hot", "sunny"];
+
+
+
+        // create buttons
+
+        function createButtons() {
+            $("#arrayDisplayButtons").empty()
+            for (var i = 0; i < searchWords.length; i++) {
+
+                $("#arrayDisplayButtons").append(`<button type="button" class="btn btn-info" style="margin:5px">${searchWords[i]}</button>`);
+            }
+        };
+
+        createButtons();
+
+        $("#add-selection").on("click", function (event) {
+            event.preventDefault();
+
+            // This line grabs the input from the textbox
+            var addSelection = $("#user-input").val().trim();
+
+            // The movie from the textbox is then added to our array
+            searchWords.push(addSelection);
+            $("#user-input").empty()
+            // Calling renderButtons which handles the processing of our movie array
+            createButtons();
+
+        });
+
+
+        var search = this;
+        var giphyURL = "https://api.giphy.com/v1/gifs/search?api_key=dDdPdREPTQHbl93EgHVzZBU9C1zVNxSj&q=" + search + "&limit=10&offset=0&rating=Y&lang=en";
+
+
+
+        $.ajax({
+            url: giphyURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            console.log(response.data[0].bitly_url);
+
+
+            $("#gifResult").html(`<img src="${response.data[0].bitly_url}"`);
+
+        });
+
+
+
+        $(".gif").on("click", function () {
+
+            var state = $(this).attr("data-state");
+            console.log(state)
+
+
+            if (state === "still") {
+
+                var animateSrc = $(this).attr("data-animate");
+                $(this).attr("src", animateSrc);
+                $(this).attr("data-state", "animate")
+            } else {
+                var stillSrc = $(this).attr("data-still");
+                $(this).attr("src", stillSrc);
+                $(this).attr("data-state", "still");
+            }
+
+        });
+    </script>
+</body>
+
+</html>
