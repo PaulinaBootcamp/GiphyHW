@@ -3,20 +3,28 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Stop: It's Giphy time</title>
+    <title>Magical GIFs</title>
+
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <!-- Bootstrap File -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
+
 </head>
 
-<body style="background-color: #F5FCFF">
+<body>
     <div class="container" style="margin-top: 20px">
         <div class="row">
             <div class="col-md-12">
-                <h1 style="color:orange">Perfect GIF is just a button click away!</h1>
+                <h1 class="magic">Magical GIFs are just a button click away!</h1>
             </div>
         </div>
         <div class="row">
@@ -27,11 +35,13 @@
                 <div>
 
                     <form id="userForm">
-                        <label for="user-input">Enter your own category below:</label>
+                        <label for="user-input" class="magic addYourOwn">
+                            <h4>Enter your own category below:</h4>
+                        </label>
                         <input type="text" id="user-input"><br>
 
                         <!-- Button triggers new movie to be added -->
-                        <input id="add-selection" type="submit" class="btn btn-secondary" style="margin-top: 10px"
+                        <input id="add-selection" type="submit" class="btn" style="margin-top: 10px"
                             value="Add new button to selection">
                     </form>
                 </div>
@@ -55,7 +65,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
-        var searchWords = ["Lion King", "Shrek", "Pocahontas", "Beauty and the Beast", "Peter Pan", "Tangled", "Moana", "Coco"];
+        var searchWords = ["Lion King", "Aladdin", "Pocahontas", "Beauty and the Beast", "Peter Pan", "Tangled", "10 Dalmatians", "Bambi", "Cinderella"];
 
         function createButtons() {
             $("#arrayDisplayButtons").empty();
@@ -66,7 +76,7 @@
                 var a = $("<button>");
                 // Adds a class of movie to our button
                 a.addClass("searchWords");
-                a.addClass("btn btn-info");
+                a.addClass("btn");
                 // Added a data-attribute
                 a.attr("data-name", searchWords[i]);
                 a.css("margin", "5px")
@@ -115,7 +125,7 @@
                     data-state="still" 
                     class="gif"
                     >                    
-                    <p>Rating: ${response.data[i].rating}</p>
+                    <p style="color:purple">Rating: ${response.data[i].rating}</p>
                     </div>
                     `);
 
