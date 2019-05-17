@@ -18,10 +18,11 @@ body {
 
 #add-selection {
     background-color: purple;
+    border-radius: 10px;
 }
 
 .container {
     background: rgba(255, 255, 255, 0.45);
-    padding: 15px;
+    padding: 25px;
     border-radius: 25px;
 }
