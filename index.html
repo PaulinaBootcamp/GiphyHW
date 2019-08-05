@@ -106,14 +106,16 @@
 
             $("#gifResult").empty()
             var gifChoice = $(this).attr("data-name");
+            console.log(gifChoice)
 
-            var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=dDdPdREPTQHbl93EgHVzZBU9C1zVNxSj&q=" + gifChoice + "&limit=10&offset=0&rating=Y&lang=en";
+            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifChoice + "&api_key=dc6zaTOxFJmzC&limit=10";
 
             // Creates AJAX call for the specific movie button being clicked
             $.ajax({
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
+                console.log(response)
 
                 for (var i = 0; i < response.data.length; i++) {
                     $("#gifResult").append(`
